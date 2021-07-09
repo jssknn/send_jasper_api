@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envio Jasper</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.1/css/bulma.min.css">
+
+</head>
+
+<body>
+    <section class="section">
+        <div class="columns">
+            <div class="column is-one-third is-offset-one-third">
+                <h1 class="is-size-1">Envio de Mensajes Jasper</h1>
+                <form action="{{url_for('enviar_comandos')}}" method="post">
+                    <label for="iccds">ICCD (Separados por coma "," )</label>
+                    <div class="control">
+                        <input autofocus required type="text" class="input" placeholder="Iccd" id="iccds"
+                            name="iccds">
+                    </div>
+                    <div class="control">
+                        <label for="comandos">Comandos (Separados por barra "|" )</label>
+                        <input required type="text" class="input" placeholder="Comandos" id="comandos"
+                            name="comandos" >
+                    </div>
+
+                    <button class="button is-success mt-2"  id="enviar">Enviar</button>
+                    {# Mostrar mensajes / errores si es que existen #}
+                    {% with mensajes_flash = get_flashed_messages() %}
+                    {% if mensajes_flash %}
+                    <div class="notification is-danger mt-2">
+                        {% for mensaje in mensajes_flash %}
+                        <li>{{ mensaje }}</li>
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
